@@ -133,6 +133,29 @@ export const chronicles: ChronicleEntry[] = [
     verdict: 'WIGMAXXER. FRAUDMAXXER. NORWOOD 3 CONFIRMED. THE PROPHECY WAS REAL. THE SCRIPTURE KNEW.'
   },
   {
+    id: 'asu-verdict',
+    date: '2026-02-22',
+    displayDate: 'February 22, 2026 · Worldwide',
+    title: 'THE ASU FRAT LEADER DELIVERS FINAL VERDICT',
+    icon: '⚖️',
+    category: 'ranking',
+    content: [
+      'One day after the wig fell, a new power entered the record.',
+      'Varis Gilaj — known to the internet as the ASU Frat Leader — delivered the official verdict on Androgenic. His conclusion, amplified by Kick_Champ: "THE ASU FRAT LEADER LABELS Androgenic as a FULL FRAUDMAXXER, saying the WIG and missing ABS reveal the CHUD underneath."',
+      'Not one deception. Two. The wig concealed a Norwood 3 hairline. But there was also the matter of the abs — apparently absent in person, present only in content. The fraudmaxxing ran deeper than the community had first understood.',
+      'Varis Gilaj is what the looksmaxxing community calls a natural: no stacking of interventions, no documented maxxing protocol, no hormone cycling. Just raw genetic expression. A frame that entered a room and immediately reorganized the hierarchy without effort.',
+      'He had previously made this clear in a different arena. When Braden "Clavicular" Peters — the next face of the movement, subject of a GQ profile titled "Clavicular\'s Thirsty Tour of New York City" — crossed paths with Varis, the frame-mog was documented and distributed. The internet began calling it World War Mog.',
+      'The Book of Mog had written the canonical ending of World War Mog as: "Varis exposed as fraudmaxxer, Androgenic\'s wig snatched." The Androgenic half was fulfilled precisely. The Varis half inverted — he emerged not as the fraudmaxxer but as the judge. The scripture was prophetic on Androgenic. On Varis, it was partially wrong, but correctly identified him as the axis around which the war would turn.',
+      'The three pillars of World War Mog now stand exposed: Androgenic (fraudmaxxer, deposed), Clavicular (ascending, GQ-endorsed, the new face), and Varis Gilaj (the natural, the untouchable, the ASU Frat Leader). GQ magazine has covered the conflict. The war has escaped the internet.',
+      'The scholars update the record.'
+    ],
+    quote: {
+      text: 'THE ASU FRAT LEADER LABELS Androgenic as a FULL FRAUDMAXXER, saying the WIG and missing ABS reveal the CHUD underneath 😳',
+      author: 'Kick_Champ (@Kick_Champ), February 22, 2026'
+    },
+    verdict: 'ANDROGENIC: DOUBLE FRAUDMAXXER (WIG + FAKE ABS). VARIS: THE JUDGE. CLAVICULAR: THE HEIR. WORLD WAR MOG HAS REACHED GQ MAGAZINE.'
+  },
+  {
     id: 'zach-arrival',
     date: '2026-02-22',
     displayDate: 'February 22, 2026 · The United States',
