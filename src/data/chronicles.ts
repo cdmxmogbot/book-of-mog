@@ -128,6 +128,7 @@ export const chronicles: ChronicleEntry[] = [
       text: "I'm the connect back in the united states. I want to stay connected to the crew while learning the ways of mogbot.",
       author: 'Zach Keith, Feb 22, 2026'
     },
+    photoPath: '/zach-keith.jpg',
     verdict: 'SOLID FOUNDATION. COUCH SELFIE COPE. FULL RETRIAL PENDING. STATESIDE CONNECT LOGGED.'
   },
   {
