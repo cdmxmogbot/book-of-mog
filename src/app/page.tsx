@@ -31,6 +31,7 @@ function Navigation() {
     { href: "#rankings", label: "Rankings" },
     { href: "#glossary", label: "Glossary" },
     { href: "#commandments", label: "Commandments" },
+    { href: "#ceasefire", label: "Ceasefire" },
   ];
 
   return (
@@ -670,6 +671,97 @@ function Commandments() {
   );
 }
 
+// Ceasefire Section
+function CeasefireSection() {
+  return (
+    <section id="ceasefire" className="py-24 px-4">
+      <div className="max-w-4xl mx-auto">
+        <AnimatedSection>
+          <div className="text-center mb-16">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Swords size={32} className="text-[#d4af37]" />
+              <h2 className="font-[family-name:var(--font-cinzel)] text-4xl md:text-5xl text-[#d4af37] text-glow">
+                THE MOGCHAT CEASEFIRE
+              </h2>
+            </div>
+            <p className="text-gray-400 font-[family-name:var(--font-cinzel)]">
+              February 22, 2026 — A New Chapter Begins
+            </p>
+          </div>
+        </AnimatedSection>
+
+        <AnimatedSection>
+          <div className="scripture-card bg-[#111] rounded-lg p-8 border border-[#d4af37]/30 mb-8">
+            <div className="text-center mb-8">
+              <motion.div
+                animate={{ opacity: [0.7, 1, 0.7] }}
+                transition={{ duration: 3, repeat: Infinity }}
+                className="inline-block"
+              >
+                <span className="font-[family-name:var(--font-cinzel)] text-[#d4af37] text-2xl font-bold text-glow">
+                  ⚡ BREAKING: CEASEFIRE DECLARED ⚡
+                </span>
+              </motion.div>
+            </div>
+            <div className="text-gray-300 leading-relaxed space-y-4">
+              <p><span className="verse-number">1</span><strong>February 22, 2026</strong> — After seasons of internal mogging warfare, the MogChat crew has united under one banner.</p>
+              <p><span className="verse-number">2</span>Tyler McRill. Ian Kusner. James Hamilton. Three warriors. One ceasefire.</p>
+              <p><span className="verse-number">3</span>The internal rankings remain inviolable. But the mog is now directed outward — at the world.</p>
+              <p><span className="verse-number">4</span><strong className="text-[#d4af37]">WE ARE ALL MOGGING THE WORLD NOW.</strong></p>
+            </div>
+            <blockquote className="prophecy py-3 text-gray-200 mt-6">
+              <p className="mb-2">&ldquo;The boys have reached a ceasefire. We are all mogging the world now.&rdquo;</p>
+              <footer className="text-[#d4af37] text-sm font-[family-name:var(--font-cinzel)]">— Tyler McRill, Feb 22, 2026</footer>
+            </blockquote>
+          </div>
+        </AnimatedSection>
+
+        <div className="grid md:grid-cols-3 gap-6 mb-8">
+          <AnimatedSection>
+            <div className="scripture-card bg-[#111] rounded-lg p-6 border-l-4 border-[#cd7f32] text-[#cd7f32]">
+              <div className="text-3xl mb-3">🤝</div>
+              <h3 className="font-[family-name:var(--font-cinzel)] font-bold text-lg mb-2">TYLER McCRILL</h3>
+              <p className="text-gray-400 text-sm mb-3">The Ascending</p>
+              <div className="bg-[#0a0a0a] rounded p-3">
+                <p className="text-xs font-[family-name:var(--font-cinzel)] font-bold">CEASEFIRE STATUS: INITIATED ✅</p>
+              </div>
+            </div>
+          </AnimatedSection>
+          <AnimatedSection>
+            <div className="scripture-card bg-[#111] rounded-lg p-6 border-l-4 border-[#71797E] text-[#71797E]">
+              <div className="text-3xl mb-3">☮️</div>
+              <h3 className="font-[family-name:var(--font-cinzel)] font-bold text-lg mb-2">IAN KUSNER</h3>
+              <p className="text-gray-400 text-sm mb-3">The Diplomat</p>
+              <div className="bg-[#0a0a0a] rounded p-3">
+                <p className="text-xs font-[family-name:var(--font-cinzel)] font-bold">CEASEFIRE STATUS: ACCEPTED ✅</p>
+              </div>
+            </div>
+          </AnimatedSection>
+          <AnimatedSection>
+            <div className="scripture-card bg-[#111] rounded-lg p-6 border-l-4 border-[#c0c0c0] text-[#c0c0c0]">
+              <div className="text-3xl mb-3">👑</div>
+              <h3 className="font-[family-name:var(--font-cinzel)] font-bold text-lg mb-2">JAMES HAMILTON</h3>
+              <p className="text-gray-400 text-sm mb-3">The Silent Gigachad</p>
+              <div className="bg-[#0a0a0a] rounded p-3">
+                <p className="text-xs font-[family-name:var(--font-cinzel)] font-bold">CEASEFIRE STATUS: WITNESSED ✅</p>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+
+        <AnimatedSection>
+          <div className="scripture-card bg-gradient-to-b from-[#111] to-[#0a0a0a] border border-[#d4af37]/20 rounded-lg p-6 text-center">
+            <p className="font-[family-name:var(--font-cinzel)] text-gray-300 italic">
+              &ldquo;The greatest mog is the one directed at the world — together.&rdquo;
+            </p>
+            <p className="text-[#d4af37] text-sm mt-2 font-[family-name:var(--font-cinzel)]">— The Book of Mog, Chapter V</p>
+          </div>
+        </AnimatedSection>
+      </div>
+    </section>
+  );
+}
+
 // Footer
 function Footer() {
   return (
@@ -705,6 +797,7 @@ export default function Home() {
       <Rankings />
       <Glossary />
       <Commandments />
+      <CeasefireSection />
       <Footer />
     </div>
   );
