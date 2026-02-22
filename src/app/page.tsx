@@ -427,33 +427,94 @@ function WorldWarMog() {
         ]}
       />
 
+      {/* Chapter V */}
+      <ChapterCard
+        chapter="CHAPTER V — CONFIRMED"
+        title="THE PROPHECY FULFILLED"
+        icon={Eye}
+        content={
+          <>
+            <p className="text-[#d4af37] font-[family-name:var(--font-cinzel)] mb-4">February 21–22, 2026 · Real Events</p>
+            <div className="bg-red-950/30 border border-red-900/50 rounded-lg p-4 mb-4">
+              <div className="flex items-center gap-2 text-red-500 mb-2">
+                <AlertTriangle size={20} />
+                <span className="font-bold font-[family-name:var(--font-cinzel)]">THE WIG SNATCH — CONFIRMED</span>
+              </div>
+              <p>
+                <span className="verse-number">1</span>
+                <strong>February 21</strong> — A stranger approached Androgenic from behind and snatched his signature cap, revealing a <strong>Norwood Level 3 baldline</strong> concealed for weeks via wig and camera angles.
+              </p>
+              <p>
+                <span className="verse-number">2</span>
+                Androgenic&apos;s own response: &ldquo;Unfortunately I&apos;ve been publicly bald for 6 weeks on TikTok though.&rdquo; Full admission. No cope.
+              </p>
+              <p>
+                <span className="verse-number">3</span>
+                Chadscan ranking: <strong>#2 → #30 → #38</strong> and falling. Millions of views. Called &ldquo;9/11 for looksmaxxers.&rdquo;
+              </p>
+            </div>
+            <div className="bg-yellow-950/30 border border-yellow-900/50 rounded-lg p-4">
+              <div className="flex items-center gap-2 text-yellow-500 mb-2">
+                <Scale size={20} />
+                <span className="font-bold font-[family-name:var(--font-cinzel)]">THE ASU FRAT LEADER DELIVERS VERDICT — Feb 22</span>
+              </div>
+              <p>
+                <span className="verse-number">4</span>
+                Varis Gilaj — from a position of total dominance — labeled Androgenic a <strong>FULL FRAUDMAXXER</strong>: the wig AND missing abs revealed a CHUD beneath the content.
+              </p>
+              <p>
+                <span className="verse-number">5</span>
+                Not one deception. <strong>Two.</strong> The double fraudmaxx is confirmed.
+              </p>
+              <p>
+                <span className="verse-number">6</span>
+                Androgenic had flown from Australia to America to confront Varis. He was wig-snatched before the confrontation could occur. The hubris was punished before the battle was joined.
+              </p>
+            </div>
+          </>
+        }
+        prophecies={[
+          {
+            author: "KICK_CHAMP, February 21, 2026",
+            text: "#2 ranked CHAD Androgenic suffered a MASSIVE CORTISOL SPIKE after a fan SNATCHED his WIG exposing his TRUE HAIRLINE 😳"
+          },
+          {
+            author: "KICK_CHAMP, February 22, 2026",
+            text: "THE ASU FRAT LEADER LABELS Androgenic as a FULL FRAUDMAXXER, saying the WIG and missing ABS reveal the CHUD underneath 😳"
+          }
+        ]}
+      />
+
       {/* Final Verdict */}
       <AnimatedSection>
         <div className="scripture-card bg-gradient-to-b from-[#111] to-[#0a0a0a] border-2 border-[#d4af37]/50 rounded-lg p-8 text-center">
           <h3 className="font-[family-name:var(--font-cinzel)] text-3xl text-[#d4af37] text-glow mb-6">
-            FINAL VERDICT
+            CURRENT STANDINGS
           </h3>
           <p className="text-2xl font-[family-name:var(--font-cinzel)] text-white mb-8">
-            THERE ARE NO WINNERS
+            THE WAR IS NOT OVER
           </p>
 
           <div className="grid md:grid-cols-3 gap-4 mb-8">
-            <div className="bg-[#0a0a0a] rounded-lg p-4 border border-red-900/50">
+            <div className="bg-[#0a0a0a] rounded-lg p-4 border border-yellow-700/50">
               <h4 className="text-[#d4af37] font-[family-name:var(--font-cinzel)] font-bold mb-2">CLAVICULAR</h4>
-              <p className="text-red-500 text-sm">Frame mogged, arrested, abandoned</p>
+              <p className="text-yellow-500 text-sm font-bold mb-1">⬆ THE HEIR</p>
+              <p className="text-gray-400 text-sm">GQ-endorsed. Frame mogged, arrested, but ascending. Power vacuum opens.</p>
             </div>
-            <div className="bg-[#0a0a0a] rounded-lg p-4 border border-red-900/50">
+            <div className="bg-[#0a0a0a] rounded-lg p-4 border border-[#d4af37]/50">
               <h4 className="text-[#d4af37] font-[family-name:var(--font-cinzel)] font-bold mb-2">VARIS GILAJ</h4>
-              <p className="text-red-500 text-sm">Exposed as FRAUDMAXXER, not in a frat</p>
+              <p className="text-[#d4af37] text-sm font-bold mb-1">👑 THE JUDGE</p>
+              <p className="text-gray-400 text-sm">The natural. No maxxing required. Delivered the verdict. Untouched.</p>
             </div>
             <div className="bg-[#0a0a0a] rounded-lg p-4 border border-red-900/50">
               <h4 className="text-[#d4af37] font-[family-name:var(--font-cinzel)] font-bold mb-2">ANDROGENIC</h4>
-              <p className="text-red-500 text-sm">Wig exposed, Norwood 5 confirmed, #2 Chad ranking STRIPPED</p>
+              <p className="text-red-500 text-sm font-bold mb-1">⬇ DOUBLE FRAUDMAXXER</p>
+              <p className="text-gray-400 text-sm">Wig + fake abs confirmed. Flew from Australia. Got wig-snatched. Ranking collapsed.</p>
             </div>
           </div>
 
           <p className="text-gray-400 italic font-[family-name:var(--font-cinzel)]">
-            &ldquo;There are no winners in World War Mog. Only those who survived the cringe.&rdquo;
+            &ldquo;The scripture is a living document. Check back daily.&rdquo;
           </p>
         </div>
       </AnimatedSection>
