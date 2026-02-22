@@ -750,6 +750,28 @@ function CeasefireSection() {
         </div>
 
         <AnimatedSection>
+          <div className="scripture-card bg-[#111] rounded-lg overflow-hidden border border-[#d4af37]/40 mb-8">
+            <div className="relative">
+              <img
+                src="/ceasefire.jpg"
+                alt="The MogChat Ceasefire — Tyler McRill, Ian Kusner, James Hamilton"
+                className="w-full object-cover max-h-[600px]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6">
+                <p className="font-[family-name:var(--font-cinzel)] text-[#d4af37] text-glow text-lg font-bold">
+                  THE CEASEFIRE PHOTOGRAPH
+                </p>
+                <p className="text-gray-400 text-sm font-[family-name:var(--font-cinzel)] mt-1">
+                  Left: Tyler McRill · Center: Ian Kusner · Right: James Hamilton
+                </p>
+                <p className="text-gray-500 text-xs mt-1">February 22, 2026 · CDMX, Mexico</p>
+              </div>
+            </div>
+          </div>
+        </AnimatedSection>
+
+        <AnimatedSection>
           <div className="scripture-card bg-gradient-to-b from-[#111] to-[#0a0a0a] border border-[#d4af37]/20 rounded-lg p-6 text-center">
             <p className="font-[family-name:var(--font-cinzel)] text-gray-300 italic">
               &ldquo;The greatest mog is the one directed at the world — together.&rdquo;
