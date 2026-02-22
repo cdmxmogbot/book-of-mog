@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Crown, Scroll, BookOpen, Scale, Flame, Skull, AlertTriangle, Eye, Swords, Handshake } from "lucide-react";
+import { chronicles, ChronicleEntry } from '../data/chronicles';
 
 // Animation wrapper component
 function AnimatedSection({ children, className = "" }: { children: React.ReactNode; className?: string }) {
@@ -210,8 +211,8 @@ function ChapterCard({
   );
 }
 
-// Chronicle Entry Component
-function ChronicleEntry({
+// Chronicle Entry Component (for special cases like Rankings)
+function ChronicleEntryComponent({
   icon,
   title,
   date,
@@ -463,6 +464,7 @@ function WorldWarMog() {
 // Glossary Section
 function Glossary() {
   const terms = [
+    { term: "Mogstery", definition: "The recorded history of mog events. The chronicles of significant moments in looksmaxxing culture and MogChat lore. That which must not be lost." },
     { term: "Mog / Mogging", definition: "To dominate or outshine in looks/presence" },
     { term: "Frame Mogging", definition: "Outshining via physical stature (shoulders, height, bone structure)" },
     { term: "Chad", definition: "Alpha male / attractive masculine archetype. PSL ranking system 1-10" },
@@ -701,6 +703,99 @@ function ScriptureTab() {
   );
 }
 
+// Category border colors
+const categoryBorderColors: Record<ChronicleEntry['category'], string> = {
+  accord: 'border-[#d4af37]',
+  historic: 'border-[#d4af37]',
+  ranking: 'border-[#c0c0c0]',
+  incident: 'border-red-500',
+  revelation: 'border-purple-500',
+};
+
+// Category badge colors
+const categoryBadgeColors: Record<ChronicleEntry['category'], string> = {
+  accord: 'bg-[#d4af37]/20 text-[#d4af37]',
+  historic: 'bg-[#d4af37]/20 text-[#d4af37]',
+  ranking: 'bg-[#c0c0c0]/20 text-[#c0c0c0]',
+  incident: 'bg-red-500/20 text-red-500',
+  revelation: 'bg-purple-500/20 text-purple-500',
+};
+
+// Chronicle Card Component (data-driven)
+function ChronicleCard({ entry }: { entry: ChronicleEntry }) {
+  return (
+    <AnimatedSection>
+      <div className={`scripture-card bg-[#111] rounded-lg p-6 md:p-8 border-l-4 ${categoryBorderColors[entry.category]}`}>
+        <div className="flex items-start gap-4 mb-4">
+          <span className="text-4xl">{entry.icon}</span>
+          <div className="flex-1">
+            <div className="flex items-center gap-2 flex-wrap mb-1">
+              <h3 className="font-[family-name:var(--font-cinzel)] text-2xl md:text-3xl text-[#d4af37] font-bold">
+                {entry.title}
+              </h3>
+              <span className={`text-xs px-2 py-1 rounded font-[family-name:var(--font-cinzel)] uppercase ${categoryBadgeColors[entry.category]}`}>
+                {entry.category}
+              </span>
+            </div>
+            <p className="text-gray-500 text-sm font-[family-name:var(--font-cinzel)]">
+              {entry.displayDate}
+            </p>
+          </div>
+        </div>
+
+        {entry.verdict && (
+          <div className="bg-[#0a0a0a] rounded-lg p-3 border border-green-900/50 mb-4">
+            <p className="text-green-500 font-[family-name:var(--font-cinzel)] font-bold text-center text-sm">
+              ✅ {entry.verdict}
+            </p>
+          </div>
+        )}
+
+        <div className="text-gray-300 leading-relaxed space-y-4">
+          {entry.content.map((paragraph, i) => (
+            <p key={i}>
+              <span className="verse-number">{i + 1}</span>
+              {paragraph}
+            </p>
+          ))}
+        </div>
+
+        {entry.quote && (
+          <blockquote className="prophecy py-3 text-gray-200 mt-4">
+            <p className="mb-2">&ldquo;{entry.quote.text}&rdquo;</p>
+            <footer className="text-[#d4af37] text-sm font-[family-name:var(--font-cinzel)]">
+              — {entry.quote.author}
+            </footer>
+          </blockquote>
+        )}
+
+        {entry.photoPath && (
+          <div className="mt-6">
+            <div className="scripture-card bg-[#0a0a0a] rounded-lg overflow-hidden border border-[#d4af37]/40">
+              <div className="relative">
+                <img
+                  src={entry.photoPath}
+                  alt={entry.title}
+                  className="w-full object-cover max-h-[500px]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-4">
+                  <p className="font-[family-name:var(--font-cinzel)] text-[#d4af37] text-glow font-bold">
+                    {entry.title}
+                  </p>
+                  <p className="text-gray-400 text-xs font-[family-name:var(--font-cinzel)] mt-1">
+                    {entry.displayDate}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </AnimatedSection>
+  );
+}
+
 // THE CHRONICLES Tab Content
 function ChroniclesTab() {
   return (
@@ -726,118 +821,14 @@ function ChroniclesTab() {
           </div>
         </AnimatedSection>
 
-        {/* Timeline - Reverse Chronological */}
+        {/* Timeline - Data-driven chronicle entries */}
         <div className="space-y-8">
-          {/* THE ZYN ACCORD — February 22, 2026 (NEWEST) */}
-          <ChronicleEntry
-            icon="🤝"
-            title="THE ZYN ACCORD"
-            date="February 22, 2026"
-            location="CDMX"
-            borderColor="border-[#d4af37]"
-          >
-            <div className="space-y-4">
-              <p>
-                <span className="verse-number">1</span>
-                <strong>James Hamilton</strong>, #2 ranked Chad and <span className="text-[#c0c0c0] font-bold">SWORDMASTER MOG</span>, was photographically documented receiving a Zyn nicotine pouch from Tyler McRill, revealing a previously undisclosed nicotine dependency.
-              </p>
-              <p>
-                <span className="verse-number">2</span>
-                The handoff was witnessed and recorded.
-              </p>
-              <p>
-                <span className="verse-number">3</span>
-                James responded with full composure and zero cope:
-              </p>
-              <blockquote className="prophecy py-3 text-gray-200">
-                <p className="mb-2">&ldquo;I&apos;ll gladly admit to loving a bit of nicotine. Nothing wrong with a stimmy check straight to the dome... especially right after a cig from a Korean restaurant owner in CDMX.&rdquo;</p>
-                <footer className="text-[#d4af37] text-sm font-[family-name:var(--font-cinzel)]">— James Hamilton</footer>
-              </blockquote>
-              <div className="bg-[#0a0a0a] rounded-lg p-4 border border-green-900/50">
-                <p className="text-green-500 font-[family-name:var(--font-cinzel)] font-bold text-center">
-                  ✅ FULL ACCOUNTABILITY · RANKINGS MAINTAINED
-                </p>
-              </div>
-            </div>
-          </ChronicleEntry>
+          {chronicles.map((entry) => (
+            <ChronicleCard key={entry.id} entry={entry} />
+          ))}
 
-          {/* THE CEASEFIRE PHOTOGRAPH — February 22, 2026 */}
-          <ChronicleEntry
-            icon="📸"
-            title="THE CEASEFIRE PHOTOGRAPH"
-            date="February 22, 2026"
-            location="CDMX"
-            borderColor="border-[#d4af37]"
-          >
-            <div className="space-y-4">
-              <div className="text-center mb-6">
-                <motion.div
-                  animate={{ opacity: [0.7, 1, 0.7] }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                  className="inline-block"
-                >
-                  <span className="font-[family-name:var(--font-cinzel)] text-[#d4af37] text-xl font-bold text-glow">
-                    ⚡ BREAKING: CEASEFIRE DECLARED ⚡
-                  </span>
-                </motion.div>
-              </div>
-
-              <p><span className="verse-number">1</span>After seasons of internal mogging warfare, the MogChat crew has united under one banner.</p>
-              <p><span className="verse-number">2</span>Tyler McRill. Ian Kusner. James Hamilton. Three warriors. One ceasefire.</p>
-              <p><span className="verse-number">3</span>The internal rankings remain inviolable. But the mog is now directed outward — at the world.</p>
-              <p><span className="verse-number">4</span><strong className="text-[#d4af37]">WE ARE ALL MOGGING THE WORLD NOW.</strong></p>
-
-              <blockquote className="prophecy py-3 text-gray-200 mt-4">
-                <p className="mb-2">&ldquo;The boys have reached a ceasefire. We are all mogging the world now.&rdquo;</p>
-                <footer className="text-[#d4af37] text-sm font-[family-name:var(--font-cinzel)]">— Tyler McRill, Feb 22, 2026</footer>
-              </blockquote>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-4 my-6">
-              <div className="scripture-card bg-[#0a0a0a] rounded-lg p-4 border-l-4 border-[#cd7f32] text-[#cd7f32]">
-                <div className="text-2xl mb-2">🤝</div>
-                <h4 className="font-[family-name:var(--font-cinzel)] font-bold text-sm mb-1">TYLER McCRILL</h4>
-                <p className="text-gray-500 text-xs mb-2">The Ascending</p>
-                <p className="text-xs font-[family-name:var(--font-cinzel)] font-bold">CEASEFIRE: INITIATED ✅</p>
-              </div>
-              <div className="scripture-card bg-[#0a0a0a] rounded-lg p-4 border-l-4 border-[#71797E] text-[#71797E]">
-                <div className="text-2xl mb-2">☮️</div>
-                <h4 className="font-[family-name:var(--font-cinzel)] font-bold text-sm mb-1">IAN KUSNER</h4>
-                <p className="text-gray-500 text-xs mb-2">The Diplomat</p>
-                <p className="text-xs font-[family-name:var(--font-cinzel)] font-bold">CEASEFIRE: ACCEPTED ✅</p>
-              </div>
-              <div className="scripture-card bg-[#0a0a0a] rounded-lg p-4 border-l-4 border-[#c0c0c0] text-[#c0c0c0]">
-                <div className="text-2xl mb-2">👑</div>
-                <h4 className="font-[family-name:var(--font-cinzel)] font-bold text-sm mb-1">JAMES HAMILTON</h4>
-                <p className="text-gray-500 text-xs mb-2">The Silent Gigachad</p>
-                <p className="text-xs font-[family-name:var(--font-cinzel)] font-bold">CEASEFIRE: WITNESSED ✅</p>
-              </div>
-            </div>
-
-            <AnimatedSection>
-              <div className="scripture-card bg-[#0a0a0a] rounded-lg overflow-hidden border border-[#d4af37]/40">
-                <div className="relative">
-                  <img
-                    src="/ceasefire.jpg"
-                    alt="The MogChat Ceasefire — Tyler McRill, Ian Kusner, James Hamilton"
-                    className="w-full object-cover max-h-[500px]"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <p className="font-[family-name:var(--font-cinzel)] text-[#d4af37] text-glow font-bold">
-                      THE CEASEFIRE PHOTOGRAPH
-                    </p>
-                    <p className="text-gray-400 text-xs font-[family-name:var(--font-cinzel)] mt-1">
-                      Left: Tyler McRill · Center: Ian Kusner · Right: James Hamilton
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </AnimatedSection>
-          </ChronicleEntry>
-
-          {/* THE MOGCHAT SACRED RANKINGS */}
-          <ChronicleEntry
+          {/* THE MOGCHAT SACRED RANKINGS (special styling, kept hardcoded) */}
+          <ChronicleEntryComponent
             icon="👑"
             title="THE MOGCHAT SACRED RANKINGS"
             date="Ongoing"
@@ -848,7 +839,7 @@ function ChroniclesTab() {
               <p className="text-gray-400 mb-6">The official power rankings of the MogChat crew. Updated as events unfold.</p>
             </div>
             <Rankings />
-          </ChronicleEntry>
+          </ChronicleEntryComponent>
         </div>
 
         {/* Closing quote */}
