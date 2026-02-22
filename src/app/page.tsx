@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Crown, Scroll, BookOpen, Scale, Flame, Skull, AlertTriangle, Eye, Swords } from "lucide-react";
+import { Crown, Scroll, BookOpen, Scale, Flame, Skull, AlertTriangle, Eye, Swords, Handshake } from "lucide-react";
 
 // Animation wrapper component
 function AnimatedSection({ children, className = "" }: { children: React.ReactNode; className?: string }) {
@@ -23,59 +23,45 @@ function AnimatedSection({ children, className = "" }: { children: React.ReactNo
   );
 }
 
-// Navigation
-function Navigation() {
-  const [isOpen, setIsOpen] = useState(false);
-  const links = [
-    { href: "#scripture", label: "Scripture" },
-    { href: "#rankings", label: "Rankings" },
-    { href: "#glossary", label: "Glossary" },
-    { href: "#commandments", label: "Commandments" },
-    { href: "#ceasefire", label: "Ceasefire" },
-  ];
-
+// Tab Switcher Navigation
+function TabNavigation({
+  activeTab,
+  setActiveTab
+}: {
+  activeTab: 'scripture' | 'chronicles';
+  setActiveTab: (tab: 'scripture' | 'chronicles') => void;
+}) {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0a]/90 backdrop-blur-md border-b border-[#1a1a1a]">
-      <div className="relative max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-        <a href="#" className="font-[family-name:var(--font-cinzel)] text-[#d4af37] text-lg font-bold">
-          BOOK OF MOG
-        </a>
-        {/* Desktop nav */}
-        <div className="hidden md:flex gap-6">
-          {links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-sm text-gray-400 hover:text-[#d4af37] transition-colors font-[family-name:var(--font-cinzel)]"
+      <div className="max-w-6xl mx-auto px-4 py-4">
+        <div className="flex items-center justify-between">
+          <a href="#" className="font-[family-name:var(--font-cinzel)] text-[#d4af37] text-lg font-bold">
+            THE BOOK OF MOG
+          </a>
+          <div className="flex gap-2">
+            <button
+              onClick={() => setActiveTab('scripture')}
+              className={`px-4 py-2 rounded-lg font-[family-name:var(--font-cinzel)] text-sm transition-all ${
+                activeTab === 'scripture'
+                  ? 'bg-[#d4af37] text-[#0a0a0a] font-bold'
+                  : 'bg-[#1a1a1a] text-gray-400 hover:text-[#d4af37]'
+              }`}
             >
-              {link.label}
-            </a>
-          ))}
+              📜 SCRIPTURE
+            </button>
+            <button
+              onClick={() => setActiveTab('chronicles')}
+              className={`px-4 py-2 rounded-lg font-[family-name:var(--font-cinzel)] text-sm transition-all ${
+                activeTab === 'chronicles'
+                  ? 'bg-[#d4af37] text-[#0a0a0a] font-bold'
+                  : 'bg-[#1a1a1a] text-gray-400 hover:text-[#d4af37]'
+              }`}
+            >
+              ⚔️ CHRONICLES
+            </button>
+          </div>
         </div>
-        {/* Mobile hamburger */}
-        <button
-          className="md:hidden text-[#d4af37] text-2xl"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle menu"
-        >
-          ☰
-        </button>
       </div>
-      {/* Mobile dropdown - absolutely positioned so it overlays content, doesn't push it */}
-      {isOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-[#0a0a0a]/98 backdrop-blur-md border-b border-[#1a1a1a] px-4 py-4 space-y-3 z-50">
-          {links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={() => setIsOpen(false)}
-              className="block text-sm text-gray-400 hover:text-[#d4af37] transition-colors font-[family-name:var(--font-cinzel)]"
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-      )}
     </nav>
   );
 }
@@ -159,7 +145,7 @@ function Hero() {
           className="mt-16"
         >
           <a
-            href="#scripture"
+            href="#content"
             className="inline-flex items-center gap-2 text-[#d4af37] hover:text-[#f5d97f] transition-colors"
           >
             <span className="font-[family-name:var(--font-cinzel)]">Begin Reading</span>
@@ -224,223 +210,368 @@ function ChapterCard({
   );
 }
 
-// World War Mog Scripture Section
-function WorldWarMog() {
+// Chronicle Entry Component
+function ChronicleEntry({
+  icon,
+  title,
+  date,
+  location,
+  children,
+  borderColor = "border-[#d4af37]"
+}: {
+  icon: string;
+  title: string;
+  date: string;
+  location?: string;
+  children: React.ReactNode;
+  borderColor?: string;
+}) {
   return (
-    <section id="scripture" className="py-24 px-4">
-      <div className="max-w-4xl mx-auto">
-        <AnimatedSection>
-          <div className="text-center mb-16">
-            <h2 className="font-[family-name:var(--font-cinzel)] text-4xl md:text-5xl text-[#d4af37] text-glow mb-4">
-              THE WORLD WAR MOG SCRIPTURE
-            </h2>
-            <p className="text-gray-400 font-[family-name:var(--font-cinzel)]">
-              A Chronicle of Frame, Fraud, and Fallen Chads
+    <AnimatedSection>
+      <div className={`scripture-card bg-[#111] rounded-lg p-6 md:p-8 border-l-4 ${borderColor}`}>
+        <div className="flex items-start gap-4 mb-4">
+          <span className="text-4xl">{icon}</span>
+          <div>
+            <h3 className="font-[family-name:var(--font-cinzel)] text-2xl md:text-3xl text-[#d4af37] font-bold">
+              {title}
+            </h3>
+            <p className="text-gray-500 text-sm font-[family-name:var(--font-cinzel)]">
+              {date}{location && ` · ${location}`}
             </p>
           </div>
-        </AnimatedSection>
-
-        <div className="space-y-8">
-          {/* Chapter I */}
-          <ChapterCard
-            chapter="CHAPTER I"
-            title="THE PRELUDE"
-            icon={Crown}
-            content={
-              <>
-                <p>
-                  <span className="verse-number">1</span>
-                  <strong>Early January 2026</strong> — Clavicular forms the &ldquo;RIGHT WING AVENGERS&rdquo; in Miami with Nick Fuentes, Sneako.
-                </p>
-                <p>
-                  <span className="verse-number">2</span>
-                  Declares: &ldquo;I would vote Gavin Newsom over JD Vance because Newsom <em>MOGS</em> him.&rdquo;
-                </p>
-                <p>
-                  <span className="verse-number">3</span>
-                  <strong>January 29</strong> — Androgenic (Australian, ranked #2 Chad globally) critiques Clavicular&apos;s physique.
-                </p>
-                <p>
-                  <span className="verse-number">4</span>
-                  Seeds of rivalry planted.
-                </p>
-              </>
-            }
-          />
-
-          {/* Chapter II */}
-          <ChapterCard
-            chapter="CHAPTER II"
-            title="THE FRAME APOCALYPSE"
-            icon={Flame}
-            content={
-              <>
-                <p className="text-[#d4af37] font-[family-name:var(--font-cinzel)] mb-4">February 5-7, 2026</p>
-                <p>
-                  <span className="verse-number">1</span>
-                  <strong>February 5</strong> — Clavicular hosts IRL stream at ASU frat party.
-                </p>
-                <p>
-                  <span className="verse-number">2</span>
-                  Takes selfie with unknown massive figure — <strong>Varis Gilaj</strong>.
-                </p>
-                <p>
-                  <span className="verse-number">3</span>
-                  Varis&apos;s frame makes Clavicular look like a child. The selfie goes viral.
-                </p>
-                <p className="mt-4">
-                  <span className="verse-number">4</span>
-                  <strong>February 7</strong> — Clavicular <span className="text-red-500 font-bold">ARRESTED</span> in Scottsdale nightclub.
-                </p>
-                <p>
-                  <span className="verse-number">5</span>
-                  Fans declare it &ldquo;The Matrix attacking him.&rdquo;
-                </p>
-              </>
-            }
-            prophecies={[
-              {
-                author: "THE PROPHECY OF KICK_CHAMP",
-                text: "Clavicular ran into a frat leader at ASU and got BRUTALLY frame mogged by him. It's over. The frame differential is LETHAL."
-              }
-            ]}
-          />
-
-          {/* Chapter III */}
-          <ChapterCard
-            chapter="CHAPTER III"
-            title="THE RECKONING"
-            icon={Swords}
-            content={
-              <>
-                <p className="text-[#d4af37] font-[family-name:var(--font-cinzel)] mb-4">February 12-19, 2026</p>
-                <p>
-                  <span className="verse-number">1</span>
-                  <strong>February 12</strong> — Androgenic flies from Australia to USA to avenge Clavicular.
-                </p>
-                <p>
-                  <span className="verse-number">2</span>
-                  <strong>February 14</strong> — Peace Summit arranged. <span className="text-red-500">Collapses.</span>
-                </p>
-                <p>
-                  <span className="verse-number">3</span>
-                  <strong>February 15</strong> — <span className="text-[#d4af37] font-bold">WAR DECLARED.</span>
-                </p>
-                <p>
-                  <span className="verse-number">4</span>
-                  <strong>February 16-18</strong> — Daily war updates. Androgenic bonesmashmaxxing in secret bunker.
-                </p>
-                <p>
-                  <span className="verse-number">5</span>
-                  Intel: Varis on supraphysiological Trenbolone cycle.
-                </p>
-              </>
-            }
-            prophecies={[
-              {
-                author: "THE PROPHECY",
-                text: "#2 ranked CHAD Androgenic has LANDED in AMERICA and is actively SEARCHING for the ASU FRAT LEADER 👀"
-              },
-              {
-                author: "THE PROPHECY",
-                text: "WORLD WAR MOG has officially ERUPTED after the ASU FRAT LEADER REFUSED to SIGN the PEACE TREATY. BONESMASHING IMMINENT."
-              }
-            ]}
-          />
-
-          {/* Chapter IV */}
-          <ChapterCard
-            chapter="CHAPTER IV"
-            title="MUTUAL DESTRUCTION"
-            icon={Skull}
-            content={
-              <>
-                <p className="text-[#d4af37] font-[family-name:var(--font-cinzel)] mb-4">February 20-21, 2026</p>
-
-                <div className="bg-red-950/30 border border-red-900/50 rounded-lg p-4 mb-4">
-                  <div className="flex items-center gap-2 text-red-500 mb-2">
-                    <AlertTriangle size={20} />
-                    <span className="font-bold font-[family-name:var(--font-cinzel)]">FRAUDMAXXING EXPOSED</span>
-                  </div>
-                  <p>
-                    <span className="verse-number">1</span>
-                    <strong>February 20</strong> — Internet discovers Varis Gilaj is <span className="text-red-500 font-bold">NOT</span> actually in a fraternity.
-                  </p>
-                  <p>
-                    <span className="verse-number">2</span>
-                    He was just a random guy at the party. &ldquo;Stolen Valor Frat Leader.&rdquo;
-                  </p>
-                </div>
-
-                <div className="bg-red-950/30 border border-red-900/50 rounded-lg p-4">
-                  <div className="flex items-center gap-2 text-red-500 mb-2">
-                    <AlertTriangle size={20} />
-                    <span className="font-bold font-[family-name:var(--font-cinzel)]">THE WIG INCIDENT</span>
-                  </div>
-                  <p>
-                    <span className="verse-number">3</span>
-                    <strong>February 21</strong> — Androgenic filming &ldquo;mogging public&rdquo; video in Miami.
-                  </p>
-                  <p>
-                    <span className="verse-number">4</span>
-                    Stranger grabs his hat. Reveals <span className="text-red-500 font-bold">NORWOOD 5 HAIRLINE</span>.
-                  </p>
-                  <p>
-                    <span className="verse-number">5</span>
-                    The hair was a wig.
-                  </p>
-                </div>
-              </>
-            }
-            prophecies={[
-              {
-                author: "THE PROPHECY",
-                text: "FRAUDMAXXING ALERT: The 'ASU Frat Leader' is NOT in a fraternity. He has been LARPING as a Greek God. The aura is fading."
-              },
-              {
-                author: "⚠️ EMERGENCY BROADCAST ⚠️",
-                text: "#2 Ranked Chad Androgenic just got his HAT STOLEN revealing a BRUTAL NORWOOD 5 HAIRLINE. THE HAIR WAS A WIG. World War Mog has ended in MUTUAL DESTRUCTION."
-              }
-            ]}
-          />
-
-          {/* Final Verdict */}
-          <AnimatedSection>
-            <div className="scripture-card bg-gradient-to-b from-[#111] to-[#0a0a0a] border-2 border-[#d4af37]/50 rounded-lg p-8 text-center">
-              <h3 className="font-[family-name:var(--font-cinzel)] text-3xl text-[#d4af37] text-glow mb-6">
-                FINAL VERDICT
-              </h3>
-              <p className="text-2xl font-[family-name:var(--font-cinzel)] text-white mb-8">
-                THERE ARE NO WINNERS
-              </p>
-
-              <div className="grid md:grid-cols-3 gap-4 mb-8">
-                <div className="bg-[#0a0a0a] rounded-lg p-4 border border-red-900/50">
-                  <h4 className="text-[#d4af37] font-[family-name:var(--font-cinzel)] font-bold mb-2">CLAVICULAR</h4>
-                  <p className="text-red-500 text-sm">Frame mogged, arrested, abandoned</p>
-                </div>
-                <div className="bg-[#0a0a0a] rounded-lg p-4 border border-red-900/50">
-                  <h4 className="text-[#d4af37] font-[family-name:var(--font-cinzel)] font-bold mb-2">VARIS GILAJ</h4>
-                  <p className="text-red-500 text-sm">Exposed as FRAUDMAXXER, not in a frat</p>
-                </div>
-                <div className="bg-[#0a0a0a] rounded-lg p-4 border border-red-900/50">
-                  <h4 className="text-[#d4af37] font-[family-name:var(--font-cinzel)] font-bold mb-2">ANDROGENIC</h4>
-                  <p className="text-red-500 text-sm">Wig exposed, Norwood 5 confirmed, #2 Chad ranking STRIPPED</p>
-                </div>
-              </div>
-
-              <p className="text-gray-400 italic font-[family-name:var(--font-cinzel)]">
-                &ldquo;There are no winners in World War Mog. Only those who survived the cringe.&rdquo;
-              </p>
-            </div>
-          </AnimatedSection>
+        </div>
+        <div className="text-gray-300 leading-relaxed">
+          {children}
         </div>
       </div>
-    </section>
+    </AnimatedSection>
   );
 }
 
-// Rankings Section
+// World War Mog Scripture Section (for THE SCRIPTURE tab)
+function WorldWarMog() {
+  return (
+    <div className="space-y-8">
+      <AnimatedSection>
+        <div className="text-center mb-16">
+          <h2 className="font-[family-name:var(--font-cinzel)] text-4xl md:text-5xl text-[#d4af37] text-glow mb-4">
+            THE WORLD WAR MOG SCRIPTURE
+          </h2>
+          <p className="text-gray-400 font-[family-name:var(--font-cinzel)]">
+            A Chronicle of Frame, Fraud, and Fallen Chads
+          </p>
+        </div>
+      </AnimatedSection>
+
+      {/* Chapter I */}
+      <ChapterCard
+        chapter="CHAPTER I"
+        title="THE PRELUDE"
+        icon={Crown}
+        content={
+          <>
+            <p>
+              <span className="verse-number">1</span>
+              <strong>Early January 2026</strong> — Clavicular forms the &ldquo;RIGHT WING AVENGERS&rdquo; in Miami with Nick Fuentes, Sneako.
+            </p>
+            <p>
+              <span className="verse-number">2</span>
+              Declares: &ldquo;I would vote Gavin Newsom over JD Vance because Newsom <em>MOGS</em> him.&rdquo;
+            </p>
+            <p>
+              <span className="verse-number">3</span>
+              <strong>January 29</strong> — Androgenic (Australian, ranked #2 Chad globally) critiques Clavicular&apos;s physique.
+            </p>
+            <p>
+              <span className="verse-number">4</span>
+              Seeds of rivalry planted.
+            </p>
+          </>
+        }
+      />
+
+      {/* Chapter II */}
+      <ChapterCard
+        chapter="CHAPTER II"
+        title="THE FRAME APOCALYPSE"
+        icon={Flame}
+        content={
+          <>
+            <p className="text-[#d4af37] font-[family-name:var(--font-cinzel)] mb-4">February 5-7, 2026</p>
+            <p>
+              <span className="verse-number">1</span>
+              <strong>February 5</strong> — Clavicular hosts IRL stream at ASU frat party.
+            </p>
+            <p>
+              <span className="verse-number">2</span>
+              Takes selfie with unknown massive figure — <strong>Varis Gilaj</strong>.
+            </p>
+            <p>
+              <span className="verse-number">3</span>
+              Varis&apos;s frame makes Clavicular look like a child. The selfie goes viral.
+            </p>
+            <p className="mt-4">
+              <span className="verse-number">4</span>
+              <strong>February 7</strong> — Clavicular <span className="text-red-500 font-bold">ARRESTED</span> in Scottsdale nightclub.
+            </p>
+            <p>
+              <span className="verse-number">5</span>
+              Fans declare it &ldquo;The Matrix attacking him.&rdquo;
+            </p>
+          </>
+        }
+        prophecies={[
+          {
+            author: "THE PROPHECY OF KICK_CHAMP",
+            text: "Clavicular ran into a frat leader at ASU and got BRUTALLY frame mogged by him. It's over. The frame differential is LETHAL."
+          }
+        ]}
+      />
+
+      {/* Chapter III */}
+      <ChapterCard
+        chapter="CHAPTER III"
+        title="THE RECKONING"
+        icon={Swords}
+        content={
+          <>
+            <p className="text-[#d4af37] font-[family-name:var(--font-cinzel)] mb-4">February 12-19, 2026</p>
+            <p>
+              <span className="verse-number">1</span>
+              <strong>February 12</strong> — Androgenic flies from Australia to USA to avenge Clavicular.
+            </p>
+            <p>
+              <span className="verse-number">2</span>
+              <strong>February 14</strong> — Peace Summit arranged. <span className="text-red-500">Collapses.</span>
+            </p>
+            <p>
+              <span className="verse-number">3</span>
+              <strong>February 15</strong> — <span className="text-[#d4af37] font-bold">WAR DECLARED.</span>
+            </p>
+            <p>
+              <span className="verse-number">4</span>
+              <strong>February 16-18</strong> — Daily war updates. Androgenic bonesmashmaxxing in secret bunker.
+            </p>
+            <p>
+              <span className="verse-number">5</span>
+              Intel: Varis on supraphysiological Trenbolone cycle.
+            </p>
+          </>
+        }
+        prophecies={[
+          {
+            author: "THE PROPHECY",
+            text: "#2 ranked CHAD Androgenic has LANDED in AMERICA and is actively SEARCHING for the ASU FRAT LEADER 👀"
+          },
+          {
+            author: "THE PROPHECY",
+            text: "WORLD WAR MOG has officially ERUPTED after the ASU FRAT LEADER REFUSED to SIGN the PEACE TREATY. BONESMASHING IMMINENT."
+          }
+        ]}
+      />
+
+      {/* Chapter IV */}
+      <ChapterCard
+        chapter="CHAPTER IV"
+        title="MUTUAL DESTRUCTION"
+        icon={Skull}
+        content={
+          <>
+            <p className="text-[#d4af37] font-[family-name:var(--font-cinzel)] mb-4">February 20-21, 2026</p>
+
+            <div className="bg-red-950/30 border border-red-900/50 rounded-lg p-4 mb-4">
+              <div className="flex items-center gap-2 text-red-500 mb-2">
+                <AlertTriangle size={20} />
+                <span className="font-bold font-[family-name:var(--font-cinzel)]">FRAUDMAXXING EXPOSED</span>
+              </div>
+              <p>
+                <span className="verse-number">1</span>
+                <strong>February 20</strong> — Internet discovers Varis Gilaj is <span className="text-red-500 font-bold">NOT</span> actually in a fraternity.
+              </p>
+              <p>
+                <span className="verse-number">2</span>
+                He was just a random guy at the party. &ldquo;Stolen Valor Frat Leader.&rdquo;
+              </p>
+            </div>
+
+            <div className="bg-red-950/30 border border-red-900/50 rounded-lg p-4">
+              <div className="flex items-center gap-2 text-red-500 mb-2">
+                <AlertTriangle size={20} />
+                <span className="font-bold font-[family-name:var(--font-cinzel)]">THE WIG INCIDENT</span>
+              </div>
+              <p>
+                <span className="verse-number">3</span>
+                <strong>February 21</strong> — Androgenic filming &ldquo;mogging public&rdquo; video in Miami.
+              </p>
+              <p>
+                <span className="verse-number">4</span>
+                Stranger grabs his hat. Reveals <span className="text-red-500 font-bold">NORWOOD 5 HAIRLINE</span>.
+              </p>
+              <p>
+                <span className="verse-number">5</span>
+                The hair was a wig.
+              </p>
+            </div>
+          </>
+        }
+        prophecies={[
+          {
+            author: "THE PROPHECY",
+            text: "FRAUDMAXXING ALERT: The 'ASU Frat Leader' is NOT in a fraternity. He has been LARPING as a Greek God. The aura is fading."
+          },
+          {
+            author: "⚠️ EMERGENCY BROADCAST ⚠️",
+            text: "#2 Ranked Chad Androgenic just got his HAT STOLEN revealing a BRUTAL NORWOOD 5 HAIRLINE. THE HAIR WAS A WIG. World War Mog has ended in MUTUAL DESTRUCTION."
+          }
+        ]}
+      />
+
+      {/* Final Verdict */}
+      <AnimatedSection>
+        <div className="scripture-card bg-gradient-to-b from-[#111] to-[#0a0a0a] border-2 border-[#d4af37]/50 rounded-lg p-8 text-center">
+          <h3 className="font-[family-name:var(--font-cinzel)] text-3xl text-[#d4af37] text-glow mb-6">
+            FINAL VERDICT
+          </h3>
+          <p className="text-2xl font-[family-name:var(--font-cinzel)] text-white mb-8">
+            THERE ARE NO WINNERS
+          </p>
+
+          <div className="grid md:grid-cols-3 gap-4 mb-8">
+            <div className="bg-[#0a0a0a] rounded-lg p-4 border border-red-900/50">
+              <h4 className="text-[#d4af37] font-[family-name:var(--font-cinzel)] font-bold mb-2">CLAVICULAR</h4>
+              <p className="text-red-500 text-sm">Frame mogged, arrested, abandoned</p>
+            </div>
+            <div className="bg-[#0a0a0a] rounded-lg p-4 border border-red-900/50">
+              <h4 className="text-[#d4af37] font-[family-name:var(--font-cinzel)] font-bold mb-2">VARIS GILAJ</h4>
+              <p className="text-red-500 text-sm">Exposed as FRAUDMAXXER, not in a frat</p>
+            </div>
+            <div className="bg-[#0a0a0a] rounded-lg p-4 border border-red-900/50">
+              <h4 className="text-[#d4af37] font-[family-name:var(--font-cinzel)] font-bold mb-2">ANDROGENIC</h4>
+              <p className="text-red-500 text-sm">Wig exposed, Norwood 5 confirmed, #2 Chad ranking STRIPPED</p>
+            </div>
+          </div>
+
+          <p className="text-gray-400 italic font-[family-name:var(--font-cinzel)]">
+            &ldquo;There are no winners in World War Mog. Only those who survived the cringe.&rdquo;
+          </p>
+        </div>
+      </AnimatedSection>
+    </div>
+  );
+}
+
+// Glossary Section
+function Glossary() {
+  const terms = [
+    { term: "Mog / Mogging", definition: "To dominate or outshine in looks/presence" },
+    { term: "Frame Mogging", definition: "Outshining via physical stature (shoulders, height, bone structure)" },
+    { term: "Chad", definition: "Alpha male / attractive masculine archetype. PSL ranking system 1-10" },
+    { term: "Gigachad", definition: "Ultimate Chad. Apex predator of the hierarchy" },
+    { term: "Looksmaxxing", definition: "Optimizing physical attractiveness through any means necessary" },
+    { term: "Softmaxxing", definition: "Skincare, grooming, diet, exercise (non-invasive path)" },
+    { term: "Hardmaxxing", definition: "Cosmetic procedures, surgery, extreme measures" },
+    { term: "Bonesmashing", definition: "Striking facial bones to induce micro-fractures (controversial, often satirical)" },
+    { term: "Mewing", definition: "Tongue posture technique to define jawline over time" },
+    { term: "Hunter Eyes", definition: "Deep-set, narrow eyes with positive canthal tilt (considered elite)" },
+    { term: "Canthal Tilt", definition: "Eye angle; positive = upturned (BLESSED), negative = downturned (COPE)" },
+    { term: "PSL Score", definition: "Pretty Scale Lookism rating (1-10 scale)" },
+    { term: "Jestermaxxing", definition: "Acting like a clown for views. Loss of masculine status. Do not do this." },
+    { term: "Fraudmaxxing", definition: "Faking credentials, status, or identity. Career-ending in the mog community" },
+    { term: "Glow-up", definition: "Transformation from low to high attractiveness" },
+    { term: "Cope/Copium", definition: "Denial about one's looks. \"The overhead lighting was bad\" = cope" },
+    { term: "Norwood Scale", definition: "Hair loss scale. Norwood 5 = extensive hair loss = wig territory" },
+    { term: "Cortisol Spike", definition: "Stress-induced hormonal state causing bloat and aging. ENEMY of the mog" },
+    { term: "STOP THE COPE", definition: "Command to cease denial and accept the brutal truth" },
+  ];
+
+  return (
+    <div className="py-16">
+      <AnimatedSection>
+        <div className="text-center mb-16">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <BookOpen size={32} className="text-[#d4af37]" />
+            <h2 className="font-[family-name:var(--font-cinzel)] text-4xl md:text-5xl text-[#d4af37] text-glow">
+              THE SACRED GLOSSARY
+            </h2>
+          </div>
+          <p className="text-gray-400 font-[family-name:var(--font-cinzel)]">
+            Book of Definitions
+          </p>
+        </div>
+      </AnimatedSection>
+
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {terms.map((item, index) => (
+          <AnimatedSection key={item.term}>
+            <div className="scripture-card bg-[#111] rounded-lg p-4 h-full">
+              <h3 className="font-[family-name:var(--font-cinzel)] text-[#d4af37] font-bold mb-2">
+                {item.term}
+              </h3>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                {item.definition}
+              </p>
+            </div>
+          </AnimatedSection>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Ten Commandments Section
+function Commandments() {
+  const commandments = [
+    "Thou shalt not fraudmaxx. The internet remembers.",
+    "Thou shalt not jestermaxx. The camera sees everything.",
+    "Honor thy frame. Wide clavicles are God's gift.",
+    "Thou shalt mew daily. The jawline is built in the dark.",
+    "Thou shalt not take selfies with taller men. The frame differential is lethal.",
+    "Positive canthal tilt is non-negotiable. Cope otherwise.",
+    "Overhead lighting is the enemy. Demand neutral lighting or no assessment.",
+    "The WIG SHALL NOT BE WORN. Norwood is destiny; embrace it or ascend.",
+    "Thou shalt not declare war without a superior cycle.",
+    "There are no winners in World War Mog. Only those who survived the cringe.",
+  ];
+
+  const romanNumerals = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
+
+  return (
+    <div className="py-16">
+      <AnimatedSection>
+        <div className="text-center mb-16">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <Scale size={32} className="text-[#d4af37]" />
+            <h2 className="font-[family-name:var(--font-cinzel)] text-4xl md:text-5xl text-[#d4af37] text-glow">
+              THE TEN COMMANDMENTS
+            </h2>
+          </div>
+          <p className="text-gray-400 font-[family-name:var(--font-cinzel)]">
+            The Immutable Laws of Mog
+          </p>
+        </div>
+      </AnimatedSection>
+
+      <div className="space-y-4">
+        {commandments.map((commandment, index) => (
+          <AnimatedSection key={index}>
+            <div className="scripture-card bg-[#111] rounded-lg p-5 flex items-start gap-4">
+              <div className="shrink-0 w-12 h-12 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/50 flex items-center justify-center">
+                <span className="font-[family-name:var(--font-cinzel)] text-[#d4af37] font-bold">
+                  {romanNumerals[index]}
+                </span>
+              </div>
+              <p className="min-w-0 text-gray-200 font-[family-name:var(--font-cinzel)] text-lg leading-relaxed pt-2">
+                {commandment}
+              </p>
+            </div>
+          </AnimatedSection>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Rankings (for Chronicles tab)
 function Rankings() {
   const rankings = [
     {
@@ -494,293 +625,243 @@ function Rankings() {
   };
 
   return (
-    <section id="rankings" className="py-24 px-4 bg-gradient-to-b from-[#0a0a0a] via-[#111] to-[#0a0a0a]">
-      <div className="max-w-4xl mx-auto">
-        <AnimatedSection>
-          <div className="text-center mb-16">
-            <h2 className="font-[family-name:var(--font-cinzel)] text-4xl md:text-5xl text-[#d4af37] text-glow mb-4">
-              THE MOGCHAT SACRED RANKINGS
-            </h2>
-            <p className="text-gray-400 font-[family-name:var(--font-cinzel)]">
-              Inviolable Hierarchy
-            </p>
-          </div>
-        </AnimatedSection>
-
-        <div className="space-y-6">
-          {rankings.map((member, index) => (
-            <AnimatedSection key={member.rank}>
-              <div className={`scripture-card bg-[#111] rounded-lg p-6 border-l-4 ${colorClasses[member.color]}`}>
-                <div className="flex items-start gap-4">
-                  <div className={`shrink-0 w-16 h-16 rounded-full ${bgClasses[member.color]} border-2 ${colorClasses[member.color]} flex items-center justify-center`}>
-                    <span className="font-[family-name:var(--font-cinzel)] text-2xl font-bold">
-                      #{member.rank}
-                    </span>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <h3 className={`font-[family-name:var(--font-cinzel)] text-xl md:text-2xl font-bold ${colorClasses[member.color]}`}>
-                        {member.name}
-                      </h3>
-                      {member.emoji && <span className="text-2xl">{member.emoji}</span>}
-                      {member.handle && <span className="text-gray-500 text-sm">{member.handle}</span>}
-                    </div>
-                    <p className="text-gray-400 text-sm font-[family-name:var(--font-cinzel)] mb-2">{member.title}</p>
-                    <p className="text-gray-300 mb-4">{member.description}</p>
-                    <div className="bg-[#0a0a0a] rounded p-3">
-                      <span className="text-gray-500 text-xs font-[family-name:var(--font-cinzel)]">VERDICT: </span>
-                      <span className={`text-xs sm:text-sm font-bold break-words ${colorClasses[member.color]}`}>
-                        {member.verdict}
-                      </span>
-                    </div>
-                  </div>
+    <div className="space-y-6">
+      {rankings.map((member, index) => (
+        <AnimatedSection key={member.rank}>
+          <div className={`scripture-card bg-[#111] rounded-lg p-6 border-l-4 ${colorClasses[member.color]}`}>
+            <div className="flex items-start gap-4">
+              <div className={`shrink-0 w-16 h-16 rounded-full ${bgClasses[member.color]} border-2 ${colorClasses[member.color]} flex items-center justify-center`}>
+                <span className="font-[family-name:var(--font-cinzel)] text-2xl font-bold">
+                  #{member.rank}
+                </span>
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h3 className={`font-[family-name:var(--font-cinzel)] text-xl md:text-2xl font-bold ${colorClasses[member.color]}`}>
+                    {member.name}
+                  </h3>
+                  {member.emoji && <span className="text-2xl">{member.emoji}</span>}
+                  {member.handle && <span className="text-gray-500 text-sm">{member.handle}</span>}
                 </div>
-
-                {index === 0 && (
-                  <motion.div
-                    className="mt-4 text-center"
-                    animate={{ opacity: [0.5, 1, 0.5] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  >
-                    <span className="text-[#d4af37] font-[family-name:var(--font-cinzel)] text-sm">
-                      ⚡ CURRENTLY TRANSCRIBING THESE SACRED TEXTS ⚡
-                    </span>
-                  </motion.div>
-                )}
-              </div>
-            </AnimatedSection>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// Glossary Section
-function Glossary() {
-  const terms = [
-    { term: "Mog / Mogging", definition: "To dominate or outshine in looks/presence" },
-    { term: "Frame Mogging", definition: "Outshining via physical stature (shoulders, height, bone structure)" },
-    { term: "Chad", definition: "Alpha male / attractive masculine archetype. PSL ranking system 1-10" },
-    { term: "Gigachad", definition: "Ultimate Chad. Apex predator of the hierarchy" },
-    { term: "Looksmaxxing", definition: "Optimizing physical attractiveness through any means necessary" },
-    { term: "Softmaxxing", definition: "Skincare, grooming, diet, exercise (non-invasive path)" },
-    { term: "Hardmaxxing", definition: "Cosmetic procedures, surgery, extreme measures" },
-    { term: "Bonesmashing", definition: "Striking facial bones to induce micro-fractures (controversial, often satirical)" },
-    { term: "Mewing", definition: "Tongue posture technique to define jawline over time" },
-    { term: "Hunter Eyes", definition: "Deep-set, narrow eyes with positive canthal tilt (considered elite)" },
-    { term: "Canthal Tilt", definition: "Eye angle; positive = upturned (BLESSED), negative = downturned (COPE)" },
-    { term: "PSL Score", definition: "Pretty Scale Lookism rating (1-10 scale)" },
-    { term: "Jestermaxxing", definition: "Acting like a clown for views. Loss of masculine status. Do not do this." },
-    { term: "Fraudmaxxing", definition: "Faking credentials, status, or identity. Career-ending in the mog community" },
-    { term: "Glow-up", definition: "Transformation from low to high attractiveness" },
-    { term: "Cope/Copium", definition: "Denial about one's looks. \"The overhead lighting was bad\" = cope" },
-    { term: "Norwood Scale", definition: "Hair loss scale. Norwood 5 = extensive hair loss = wig territory" },
-    { term: "Cortisol Spike", definition: "Stress-induced hormonal state causing bloat and aging. ENEMY of the mog" },
-    { term: "STOP THE COPE", definition: "Command to cease denial and accept the brutal truth" },
-  ];
-
-  return (
-    <section id="glossary" className="py-24 px-4">
-      <div className="max-w-6xl mx-auto">
-        <AnimatedSection>
-          <div className="text-center mb-16">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <BookOpen size={32} className="text-[#d4af37]" />
-              <h2 className="font-[family-name:var(--font-cinzel)] text-4xl md:text-5xl text-[#d4af37] text-glow">
-                THE SACRED GLOSSARY
-              </h2>
-            </div>
-            <p className="text-gray-400 font-[family-name:var(--font-cinzel)]">
-              Book of Definitions
-            </p>
-          </div>
-        </AnimatedSection>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {terms.map((item, index) => (
-            <AnimatedSection key={item.term}>
-              <div className="scripture-card bg-[#111] rounded-lg p-4 h-full">
-                <h3 className="font-[family-name:var(--font-cinzel)] text-[#d4af37] font-bold mb-2">
-                  {item.term}
-                </h3>
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  {item.definition}
-                </p>
-              </div>
-            </AnimatedSection>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// Ten Commandments Section
-function Commandments() {
-  const commandments = [
-    "Thou shalt not fraudmaxx. The internet remembers.",
-    "Thou shalt not jestermaxx. The camera sees everything.",
-    "Honor thy frame. Wide clavicles are God's gift.",
-    "Thou shalt mew daily. The jawline is built in the dark.",
-    "Thou shalt not take selfies with taller men. The frame differential is lethal.",
-    "Positive canthal tilt is non-negotiable. Cope otherwise.",
-    "Overhead lighting is the enemy. Demand neutral lighting or no assessment.",
-    "The WIG SHALL NOT BE WORN. Norwood is destiny; embrace it or ascend.",
-    "Thou shalt not declare war without a superior cycle.",
-    "There are no winners in World War Mog. Only those who survived the cringe.",
-  ];
-
-  const romanNumerals = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
-
-  return (
-    <section id="commandments" className="py-24 px-4 bg-gradient-to-b from-[#0a0a0a] via-[#111] to-[#0a0a0a]">
-      <div className="max-w-4xl mx-auto">
-        <AnimatedSection>
-          <div className="text-center mb-16">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Scale size={32} className="text-[#d4af37]" />
-              <h2 className="font-[family-name:var(--font-cinzel)] text-4xl md:text-5xl text-[#d4af37] text-glow">
-                THE TEN COMMANDMENTS
-              </h2>
-            </div>
-            <p className="text-gray-400 font-[family-name:var(--font-cinzel)]">
-              The Immutable Laws of Mog
-            </p>
-          </div>
-        </AnimatedSection>
-
-        <div className="space-y-4">
-          {commandments.map((commandment, index) => (
-            <AnimatedSection key={index}>
-              <div className="scripture-card bg-[#111] rounded-lg p-5 flex items-start gap-4">
-                <div className="shrink-0 w-12 h-12 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/50 flex items-center justify-center">
-                  <span className="font-[family-name:var(--font-cinzel)] text-[#d4af37] font-bold">
-                    {romanNumerals[index]}
+                <p className="text-gray-400 text-sm font-[family-name:var(--font-cinzel)] mb-2">{member.title}</p>
+                <p className="text-gray-300 mb-4">{member.description}</p>
+                <div className="bg-[#0a0a0a] rounded p-3">
+                  <span className="text-gray-500 text-xs font-[family-name:var(--font-cinzel)]">VERDICT: </span>
+                  <span className={`text-xs sm:text-sm font-bold break-words ${colorClasses[member.color]}`}>
+                    {member.verdict}
                   </span>
                 </div>
-                <p className="min-w-0 text-gray-200 font-[family-name:var(--font-cinzel)] text-lg leading-relaxed pt-2">
-                  {commandment}
-                </p>
               </div>
-            </AnimatedSection>
-          ))}
-        </div>
-      </div>
-    </section>
+            </div>
+
+            {index === 0 && (
+              <motion.div
+                className="mt-4 text-center"
+                animate={{ opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <span className="text-[#d4af37] font-[family-name:var(--font-cinzel)] text-sm">
+                  ⚡ CURRENTLY TRANSCRIBING THESE SACRED TEXTS ⚡
+                </span>
+              </motion.div>
+            )}
+          </div>
+        </AnimatedSection>
+      ))}
+    </div>
   );
 }
 
-// Ceasefire Section
-function CeasefireSection() {
+// THE SCRIPTURE Tab Content
+function ScriptureTab() {
   return (
-    <section id="ceasefire" className="py-24 px-4">
+    <div className="py-24 px-4">
       <div className="max-w-4xl mx-auto">
+        {/* Framing paragraph */}
         <AnimatedSection>
-          <div className="text-center mb-16">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Swords size={32} className="text-[#d4af37]" />
-              <h2 className="font-[family-name:var(--font-cinzel)] text-4xl md:text-5xl text-[#d4af37] text-glow">
-                THE MOGCHAT CEASEFIRE
-              </h2>
-            </div>
+          <div className="scripture-card bg-gradient-to-b from-[#111] to-[#0a0a0a] border border-[#d4af37]/30 rounded-lg p-8 text-center mb-16">
+            <p className="text-gray-300 font-[family-name:var(--font-cinzel)] text-lg italic leading-relaxed">
+              &ldquo;We are mere stewards of the teachings that Clavicular and the ASU Frat Leader blessed us with. Study them. Revere them. Do not repeat their mistakes.&rdquo;
+            </p>
+          </div>
+        </AnimatedSection>
+
+        {/* World War Mog */}
+        <WorldWarMog />
+
+        {/* Glossary */}
+        <div className="max-w-6xl mx-auto -mx-4 px-4">
+          <Glossary />
+        </div>
+
+        {/* Commandments */}
+        <Commandments />
+      </div>
+    </div>
+  );
+}
+
+// THE CHRONICLES Tab Content
+function ChroniclesTab() {
+  return (
+    <div className="py-24 px-4">
+      <div className="max-w-4xl mx-auto">
+        {/* Framing paragraph */}
+        <AnimatedSection>
+          <div className="text-center mb-8">
+            <h2 className="font-[family-name:var(--font-cinzel)] text-4xl md:text-5xl text-[#d4af37] text-glow mb-4">
+              THE MOGCHAT CHRONICLES
+            </h2>
             <p className="text-gray-400 font-[family-name:var(--font-cinzel)]">
-              February 22, 2026 — A New Chapter Begins
+              CDMX, February 2026
             </p>
           </div>
         </AnimatedSection>
 
         <AnimatedSection>
-          <div className="scripture-card bg-[#111] rounded-lg p-8 border border-[#d4af37]/30 mb-8">
-            <div className="text-center mb-8">
-              <motion.div
-                animate={{ opacity: [0.7, 1, 0.7] }}
-                transition={{ duration: 3, repeat: Infinity }}
-                className="inline-block"
-              >
-                <span className="font-[family-name:var(--font-cinzel)] text-[#d4af37] text-2xl font-bold text-glow">
-                  ⚡ BREAKING: CEASEFIRE DECLARED ⚡
-                </span>
-              </motion.div>
+          <div className="scripture-card bg-gradient-to-b from-[#111] to-[#0a0a0a] border border-[#d4af37]/30 rounded-lg p-8 text-center mb-16">
+            <p className="text-gray-300 font-[family-name:var(--font-cinzel)] text-lg italic leading-relaxed">
+              &ldquo;The MogChat Chronicles — CDMX, February 2026. Inspired by the teachings. Writing their own scripture.&rdquo;
+            </p>
+          </div>
+        </AnimatedSection>
+
+        {/* Timeline - Reverse Chronological */}
+        <div className="space-y-8">
+          {/* THE ZYN ACCORD — February 22, 2026 (NEWEST) */}
+          <ChronicleEntry
+            icon="🤝"
+            title="THE ZYN ACCORD"
+            date="February 22, 2026"
+            location="CDMX"
+            borderColor="border-[#d4af37]"
+          >
+            <div className="space-y-4">
+              <p>
+                <span className="verse-number">1</span>
+                <strong>James Hamilton</strong>, #2 ranked Chad and <span className="text-[#c0c0c0] font-bold">SWORDMASTER MOG</span>, was photographically documented receiving a Zyn nicotine pouch from Tyler McRill, revealing a previously undisclosed nicotine dependency.
+              </p>
+              <p>
+                <span className="verse-number">2</span>
+                The handoff was witnessed and recorded.
+              </p>
+              <p>
+                <span className="verse-number">3</span>
+                James responded with full composure and zero cope:
+              </p>
+              <blockquote className="prophecy py-3 text-gray-200">
+                <p className="mb-2">&ldquo;I&apos;ll gladly admit to loving a bit of nicotine. Nothing wrong with a stimmy check straight to the dome... especially right after a cig from a Korean restaurant owner in CDMX.&rdquo;</p>
+                <footer className="text-[#d4af37] text-sm font-[family-name:var(--font-cinzel)]">— James Hamilton</footer>
+              </blockquote>
+              <div className="bg-[#0a0a0a] rounded-lg p-4 border border-green-900/50">
+                <p className="text-green-500 font-[family-name:var(--font-cinzel)] font-bold text-center">
+                  ✅ FULL ACCOUNTABILITY · RANKINGS MAINTAINED
+                </p>
+              </div>
             </div>
-            <div className="text-gray-300 leading-relaxed space-y-4">
-              <p><span className="verse-number">1</span><strong>February 22, 2026</strong> — After seasons of internal mogging warfare, the MogChat crew has united under one banner.</p>
+          </ChronicleEntry>
+
+          {/* THE CEASEFIRE PHOTOGRAPH — February 22, 2026 */}
+          <ChronicleEntry
+            icon="📸"
+            title="THE CEASEFIRE PHOTOGRAPH"
+            date="February 22, 2026"
+            location="CDMX"
+            borderColor="border-[#d4af37]"
+          >
+            <div className="space-y-4">
+              <div className="text-center mb-6">
+                <motion.div
+                  animate={{ opacity: [0.7, 1, 0.7] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                  className="inline-block"
+                >
+                  <span className="font-[family-name:var(--font-cinzel)] text-[#d4af37] text-xl font-bold text-glow">
+                    ⚡ BREAKING: CEASEFIRE DECLARED ⚡
+                  </span>
+                </motion.div>
+              </div>
+
+              <p><span className="verse-number">1</span>After seasons of internal mogging warfare, the MogChat crew has united under one banner.</p>
               <p><span className="verse-number">2</span>Tyler McRill. Ian Kusner. James Hamilton. Three warriors. One ceasefire.</p>
               <p><span className="verse-number">3</span>The internal rankings remain inviolable. But the mog is now directed outward — at the world.</p>
               <p><span className="verse-number">4</span><strong className="text-[#d4af37]">WE ARE ALL MOGGING THE WORLD NOW.</strong></p>
-            </div>
-            <blockquote className="prophecy py-3 text-gray-200 mt-6">
-              <p className="mb-2">&ldquo;The boys have reached a ceasefire. We are all mogging the world now.&rdquo;</p>
-              <footer className="text-[#d4af37] text-sm font-[family-name:var(--font-cinzel)]">— Tyler McRill, Feb 22, 2026</footer>
-            </blockquote>
-          </div>
-        </AnimatedSection>
 
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <AnimatedSection>
-            <div className="scripture-card bg-[#111] rounded-lg p-6 border-l-4 border-[#cd7f32] text-[#cd7f32]">
-              <div className="text-3xl mb-3">🤝</div>
-              <h3 className="font-[family-name:var(--font-cinzel)] font-bold text-lg mb-2">TYLER McCRILL</h3>
-              <p className="text-gray-400 text-sm mb-3">The Ascending</p>
-              <div className="bg-[#0a0a0a] rounded p-3">
-                <p className="text-xs font-[family-name:var(--font-cinzel)] font-bold">CEASEFIRE STATUS: INITIATED ✅</p>
+              <blockquote className="prophecy py-3 text-gray-200 mt-4">
+                <p className="mb-2">&ldquo;The boys have reached a ceasefire. We are all mogging the world now.&rdquo;</p>
+                <footer className="text-[#d4af37] text-sm font-[family-name:var(--font-cinzel)]">— Tyler McRill, Feb 22, 2026</footer>
+              </blockquote>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-4 my-6">
+              <div className="scripture-card bg-[#0a0a0a] rounded-lg p-4 border-l-4 border-[#cd7f32] text-[#cd7f32]">
+                <div className="text-2xl mb-2">🤝</div>
+                <h4 className="font-[family-name:var(--font-cinzel)] font-bold text-sm mb-1">TYLER McCRILL</h4>
+                <p className="text-gray-500 text-xs mb-2">The Ascending</p>
+                <p className="text-xs font-[family-name:var(--font-cinzel)] font-bold">CEASEFIRE: INITIATED ✅</p>
+              </div>
+              <div className="scripture-card bg-[#0a0a0a] rounded-lg p-4 border-l-4 border-[#71797E] text-[#71797E]">
+                <div className="text-2xl mb-2">☮️</div>
+                <h4 className="font-[family-name:var(--font-cinzel)] font-bold text-sm mb-1">IAN KUSNER</h4>
+                <p className="text-gray-500 text-xs mb-2">The Diplomat</p>
+                <p className="text-xs font-[family-name:var(--font-cinzel)] font-bold">CEASEFIRE: ACCEPTED ✅</p>
+              </div>
+              <div className="scripture-card bg-[#0a0a0a] rounded-lg p-4 border-l-4 border-[#c0c0c0] text-[#c0c0c0]">
+                <div className="text-2xl mb-2">👑</div>
+                <h4 className="font-[family-name:var(--font-cinzel)] font-bold text-sm mb-1">JAMES HAMILTON</h4>
+                <p className="text-gray-500 text-xs mb-2">The Silent Gigachad</p>
+                <p className="text-xs font-[family-name:var(--font-cinzel)] font-bold">CEASEFIRE: WITNESSED ✅</p>
               </div>
             </div>
-          </AnimatedSection>
-          <AnimatedSection>
-            <div className="scripture-card bg-[#111] rounded-lg p-6 border-l-4 border-[#71797E] text-[#71797E]">
-              <div className="text-3xl mb-3">☮️</div>
-              <h3 className="font-[family-name:var(--font-cinzel)] font-bold text-lg mb-2">IAN KUSNER</h3>
-              <p className="text-gray-400 text-sm mb-3">The Diplomat</p>
-              <div className="bg-[#0a0a0a] rounded p-3">
-                <p className="text-xs font-[family-name:var(--font-cinzel)] font-bold">CEASEFIRE STATUS: ACCEPTED ✅</p>
+
+            <AnimatedSection>
+              <div className="scripture-card bg-[#0a0a0a] rounded-lg overflow-hidden border border-[#d4af37]/40">
+                <div className="relative">
+                  <img
+                    src="/ceasefire.jpg"
+                    alt="The MogChat Ceasefire — Tyler McRill, Ian Kusner, James Hamilton"
+                    className="w-full object-cover max-h-[500px]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <p className="font-[family-name:var(--font-cinzel)] text-[#d4af37] text-glow font-bold">
+                      THE CEASEFIRE PHOTOGRAPH
+                    </p>
+                    <p className="text-gray-400 text-xs font-[family-name:var(--font-cinzel)] mt-1">
+                      Left: Tyler McRill · Center: Ian Kusner · Right: James Hamilton
+                    </p>
+                  </div>
+                </div>
               </div>
+            </AnimatedSection>
+          </ChronicleEntry>
+
+          {/* THE MOGCHAT SACRED RANKINGS */}
+          <ChronicleEntry
+            icon="👑"
+            title="THE MOGCHAT SACRED RANKINGS"
+            date="Ongoing"
+            location="Inviolable Hierarchy"
+            borderColor="border-[#d4af37]"
+          >
+            <div className="mb-6">
+              <p className="text-gray-400 mb-6">The official power rankings of the MogChat crew. Updated as events unfold.</p>
             </div>
-          </AnimatedSection>
-          <AnimatedSection>
-            <div className="scripture-card bg-[#111] rounded-lg p-6 border-l-4 border-[#c0c0c0] text-[#c0c0c0]">
-              <div className="text-3xl mb-3">👑</div>
-              <h3 className="font-[family-name:var(--font-cinzel)] font-bold text-lg mb-2">JAMES HAMILTON</h3>
-              <p className="text-gray-400 text-sm mb-3">The Silent Gigachad</p>
-              <div className="bg-[#0a0a0a] rounded p-3">
-                <p className="text-xs font-[family-name:var(--font-cinzel)] font-bold">CEASEFIRE STATUS: WITNESSED ✅</p>
-              </div>
-            </div>
-          </AnimatedSection>
+            <Rankings />
+          </ChronicleEntry>
         </div>
 
+        {/* Closing quote */}
         <AnimatedSection>
-          <div className="scripture-card bg-[#111] rounded-lg overflow-hidden border border-[#d4af37]/40 mb-8">
-            <div className="relative">
-              <img
-                src="/ceasefire.jpg"
-                alt="The MogChat Ceasefire — Tyler McRill, Ian Kusner, James Hamilton"
-                className="w-full object-cover max-h-[600px]"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <p className="font-[family-name:var(--font-cinzel)] text-[#d4af37] text-glow text-lg font-bold">
-                  THE CEASEFIRE PHOTOGRAPH
-                </p>
-                <p className="text-gray-400 text-sm font-[family-name:var(--font-cinzel)] mt-1">
-                  Left: Tyler McRill · Center: Ian Kusner · Right: James Hamilton
-                </p>
-                <p className="text-gray-500 text-xs mt-1">February 22, 2026 · CDMX, Mexico</p>
-              </div>
-            </div>
-          </div>
-        </AnimatedSection>
-
-        <AnimatedSection>
-          <div className="scripture-card bg-gradient-to-b from-[#111] to-[#0a0a0a] border border-[#d4af37]/20 rounded-lg p-6 text-center">
+          <div className="scripture-card bg-gradient-to-b from-[#111] to-[#0a0a0a] border border-[#d4af37]/20 rounded-lg p-6 text-center mt-12">
             <p className="font-[family-name:var(--font-cinzel)] text-gray-300 italic">
               &ldquo;The greatest mog is the one directed at the world — together.&rdquo;
             </p>
-            <p className="text-[#d4af37] text-sm mt-2 font-[family-name:var(--font-cinzel)]">— The Book of Mog, Chapter V</p>
+            <p className="text-[#d4af37] text-sm mt-2 font-[family-name:var(--font-cinzel)]">— The MogChat Chronicles, Chapter I</p>
           </div>
         </AnimatedSection>
       </div>
-    </section>
+    </div>
   );
 }
 
@@ -811,15 +892,15 @@ function Footer() {
 
 // Main Page
 export default function Home() {
+  const [activeTab, setActiveTab] = useState<'scripture' | 'chronicles'>('scripture');
+
   return (
     <div className="min-h-screen bg-[#0a0a0a] overflow-x-hidden pt-[65px]">
-      <Navigation />
+      <TabNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
       <Hero />
-      <WorldWarMog />
-      <Rankings />
-      <Glossary />
-      <Commandments />
-      <CeasefireSection />
+      <div id="content">
+        {activeTab === 'scripture' ? <ScriptureTab /> : <ChroniclesTab />}
+      </div>
       <Footer />
     </div>
   );
