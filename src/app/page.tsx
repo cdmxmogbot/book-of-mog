@@ -35,7 +35,7 @@ function Navigation() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0a]/90 backdrop-blur-md border-b border-[#1a1a1a]">
-      <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div className="relative max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
         <a href="#" className="font-[family-name:var(--font-cinzel)] text-[#d4af37] text-lg font-bold">
           BOOK OF MOG
         </a>
@@ -60,9 +60,9 @@ function Navigation() {
           ☰
         </button>
       </div>
-      {/* Mobile dropdown */}
+      {/* Mobile dropdown - absolutely positioned so it overlays content, doesn't push it */}
       {isOpen && (
-        <div className="md:hidden bg-[#0a0a0a]/95 border-t border-[#1a1a1a] px-4 py-4 space-y-3">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-[#0a0a0a]/98 backdrop-blur-md border-b border-[#1a1a1a] px-4 py-4 space-y-3 z-50">
           {links.map((link) => (
             <a
               key={link.href}
@@ -698,7 +698,7 @@ function Footer() {
 // Main Page
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#0a0a0a] overflow-x-hidden">
+    <div className="min-h-screen bg-[#0a0a0a] overflow-x-hidden pt-[65px]">
       <Navigation />
       <Hero />
       <WorldWarMog />
