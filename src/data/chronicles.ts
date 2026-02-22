@@ -108,6 +108,31 @@ export const chronicles: ChronicleEntry[] = [
     verdict: 'HARDMAXXING THE RECOVERY. OVERHEAD LIGHTING COPE PERSISTS. RETRIAL LOOKS MORE FAVORABLE.'
   },
   {
+    id: 'androgenic-exposé',
+    date: '2026-02-21',
+    displayDate: 'February 21, 2026 · The Streets',
+    title: 'THE PROPHECY FULFILLED: ANDROGENIC EXPOSED',
+    icon: '🪖',
+    category: 'historic',
+    content: [
+      'The scripture had already foretold it. Written in the canonical ending of World War Mog: "Androgenic\'s wig snatched (Norwood 5)." The scholars did not know when. Only that it would come.',
+      'On February 21st, 2026, the prophecy was fulfilled.',
+      'An unidentified individual approached Androgenic from behind during an outdoor interaction and snatched his signature baseball cap from his head. The footage revealed a pronounced Norwood Level 3 baldline — a hairline Androgenic had been concealing for approximately seven weeks through wigmaxxing: a combination of a hairpiece, headwear dependency, and strategic camera angles.',
+      'Androgenic\'s response confirmed everything: "Unfortunately I\'ve been publicly bald for 6 weeks on TikTok though." Zero cope attempted. Full acknowledgment. The wig had been real.',
+      'Kick_Champ\'s immediate verdict: "#2 ranked CHAD Androgenic suffered a MASSIVE CORTISOL SPIKE after a fan SNATCHED his WIG exposing his TRUE HAIRLINE."',
+      '@AutismCapital posted the viral clip to X with the caption: "GENERATIONAL AURA LOSS. No recovery possible. Baldmogged." The post accumulated millions of views within hours.',
+      'The community called it 9/11 for looksmaxxers. TsjGetEm declared: "I might actually cry because number one Chad just got mogged. He got caught for wigmaxxing." His Chadscan ranking collapsed from #2 to beyond #38 and continued falling.',
+      'The fraud was not merely aesthetic. It was philosophical. A man who built an empire on the premise of genetic optimization had been concealing his most critical genetic variable. The looksmaxxing community, built on the absolute theology of transparency and bone structure, could not forgive the deception.',
+      'But the scholars of MogChat noted something beyond the spectacle. The scripture had named this event before it occurred. The Book of Mog is not merely a record of events. It is a prophetic document.',
+      'The wig fell. The crown fell with it. The prophecy is sealed.'
+    ],
+    quote: {
+      text: '#2 ranked CHAD Androgenic suffered a MASSIVE CORTISOL SPIKE after a fan SNATCHED his WIG exposing his TRUE HAIRLINE 😳',
+      author: 'Kick_Champ (@Kick_Champ), February 21, 2026'
+    },
+    verdict: 'WIGMAXXER. FRAUDMAXXER. NORWOOD 3 CONFIRMED. THE PROPHECY WAS REAL. THE SCRIPTURE KNEW.'
+  },
+  {
     id: 'zach-arrival',
     date: '2026-02-22',
     displayDate: 'February 22, 2026 · The United States',
