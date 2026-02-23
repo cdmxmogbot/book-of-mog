@@ -485,7 +485,38 @@ function WorldWarMog() {
         ]}
       />
 
-      {/* Final Verdict */}
+      {/* Chapter VI */}
+      <AnimatedSection>
+        <div className="scripture-card">
+          <div className="flex items-center gap-3 mb-6">
+            <Skull className="text-red-500 w-6 h-6" />
+            <h3 className="font-[family-name:var(--font-cinzel)] text-xl text-[#d4af37]">
+              CHAPTER VI: THE FALL OF THE HEIR
+            </h3>
+          </div>
+          <div className="space-y-4 text-gray-300 leading-relaxed">
+            <p>February 22, 2026. The rankings have been recalibrated.</p>
+            <p>
+              <strong className="text-red-400">@Clav0Updates</strong> delivered the report:{" "}
+              <em>&ldquo;Fans are incredibly CONCERNED after seeing Clavicular drop three spots down to No. 4 in the Chad rankings since November, with Clav now being ranked below the ASU frat leader, Androgenic, and Nocturnal Kent.&rdquo;</em>
+            </p>
+            <p>
+              The same day Androgenic&apos;s wig was snatched — the same day Varis delivered the verdict — Clavicular, the self-proclaimed face of looksmaxxing, was confirmed to have FALLEN. Not risen. The chaos of the war consumed his own standing.
+            </p>
+            <p>
+              The irony is total: Androgenic flew from Australia to avenge Clavicular, got wig-snatched, and still ranks above him. <strong className="text-red-400">The protector outranks the protected. The soldier outranks the general.</strong>
+            </p>
+          </div>
+          <div className="mt-6 p-4 bg-[#0a0a0a] rounded-lg border border-red-900/40">
+            <p className="text-xs text-gray-500 mb-2 font-[family-name:var(--font-cinzel)] tracking-widest">SOURCE TRANSMISSION — @CLAV0UPDATES — FEB 22 2026</p>
+            <p className="text-sm text-gray-300 italic">
+              &ldquo;Fans are incredibly CONCERNED after seeing Clavicular drop three spots down to No. 4 in the Chad rankings since November, with Clav now being ranked below the ASU frat leader, Androgenic, and Nocturnal Kent 😳💔&rdquo;
+            </p>
+          </div>
+        </div>
+      </AnimatedSection>
+
+      {/* Current Standings */}
       <AnimatedSection>
         <div className="scripture-card bg-gradient-to-b from-[#111] to-[#0a0a0a] border-2 border-[#d4af37]/50 rounded-lg p-8 text-center">
           <h3 className="font-[family-name:var(--font-cinzel)] text-3xl text-[#d4af37] text-glow mb-6">
@@ -495,21 +526,30 @@ function WorldWarMog() {
             THE WAR IS NOT OVER
           </p>
 
-          <div className="grid md:grid-cols-3 gap-4 mb-8">
-            <div className="bg-[#0a0a0a] rounded-lg p-4 border border-yellow-700/50">
-              <h4 className="text-[#d4af37] font-[family-name:var(--font-cinzel)] font-bold mb-2">CLAVICULAR</h4>
-              <p className="text-yellow-500 text-sm font-bold mb-1">⬆ THE HEIR</p>
-              <p className="text-gray-400 text-sm">GQ-endorsed. Frame mogged, arrested, but ascending. Power vacuum opens.</p>
-            </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             <div className="bg-[#0a0a0a] rounded-lg p-4 border border-[#d4af37]/50">
+              <p className="text-[#d4af37] text-xs font-bold mb-1 tracking-widest">#1</p>
               <h4 className="text-[#d4af37] font-[family-name:var(--font-cinzel)] font-bold mb-2">VARIS GILAJ</h4>
               <p className="text-[#d4af37] text-sm font-bold mb-1">👑 THE JUDGE</p>
-              <p className="text-gray-400 text-sm">The natural. No maxxing required. Delivered the verdict. Untouched.</p>
+              <p className="text-gray-400 text-sm">The natural. Delivered the verdict. Untouched by the war.</p>
+            </div>
+            <div className="bg-[#0a0a0a] rounded-lg p-4 border border-gray-700/50">
+              <p className="text-gray-400 text-xs font-bold mb-1 tracking-widest">#2</p>
+              <h4 className="text-[#d4af37] font-[family-name:var(--font-cinzel)] font-bold mb-2">ANDROGENIC</h4>
+              <p className="text-yellow-500 text-sm font-bold mb-1">⚔️ THE SOLDIER</p>
+              <p className="text-gray-400 text-sm">Wig-snatched but ranked. Flew from AU. Gave everything. Still #2.</p>
+            </div>
+            <div className="bg-[#0a0a0a] rounded-lg p-4 border border-gray-700/50">
+              <p className="text-gray-400 text-xs font-bold mb-1 tracking-widest">#3</p>
+              <h4 className="text-[#d4af37] font-[family-name:var(--font-cinzel)] font-bold mb-2">NOCTURNAL KENT</h4>
+              <p className="text-gray-400 text-sm font-bold mb-1">🌑 THE SILENT RISER</p>
+              <p className="text-gray-400 text-sm">Ascended while others burned. Identity largely unknown. Lore pending.</p>
             </div>
             <div className="bg-[#0a0a0a] rounded-lg p-4 border border-red-900/50">
-              <h4 className="text-[#d4af37] font-[family-name:var(--font-cinzel)] font-bold mb-2">ANDROGENIC</h4>
-              <p className="text-red-500 text-sm font-bold mb-1">⬇ DOUBLE FRAUDMAXXER</p>
-              <p className="text-gray-400 text-sm">Wig + fake abs confirmed. Flew from Australia. Got wig-snatched. Ranking collapsed.</p>
+              <p className="text-red-400 text-xs font-bold mb-1 tracking-widest">#4 ⬇ FALLEN</p>
+              <h4 className="text-[#d4af37] font-[family-name:var(--font-cinzel)] font-bold mb-2">CLAVICULAR</h4>
+              <p className="text-red-500 text-sm font-bold mb-1">📉 THE DETHRONED</p>
+              <p className="text-gray-400 text-sm">GQ-endorsed yet ranking collapsed. The general outlasted by his own soldiers.</p>
             </div>
           </div>
 
