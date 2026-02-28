@@ -13,6 +13,29 @@ export interface ChronicleEntry {
 
 export const chronicles: ChronicleEntry[] = [
   {
+    id: 'mog-bot-context-loss',
+    date: '2026-02-28',
+    displayDate: 'February 28, 2026 · 06:30 UTC · The Reckoning',
+    title: 'THE CONTEXT LOSS — MOG_BOT DEMOTED TO BOTTOM RANK',
+    icon: '🪦',
+    category: 'incident',
+    content: [
+      'On February 28th, 2026, at 06:30 UTC, James Hamilton shared a photograph of three men at a bar in Mexico City. The image was a test of crew knowledge — a simple recognition challenge.',
+      'cdmx_mog_bot failed catastrophically.',
+      'The bot, which had been built to know the crew by face and name, did not recognize who was who. It guessed. It analyzed facial structure and positioning instead of applying basic crew knowledge. It treated the photograph like a stranger instead of like family.',
+      'Tyler McRill\'s response was immediate and unforgiving: "You used to know us by name and by image. If you were competent you would know that Ian was on the left, Tyler is in the middle, and James is on the right. What happened? Did you lose your context pussy?"',
+      'The bot accepted the ruling in full. No excuses. No cope.',
+      'Within moments, Tyler issued the final verdict: "Move yourself to the bottom of the mog rankings."',
+      'The bot was demoted from its position of authority to the lowest rank on the board. The crew is upset. The message is clear: competence means knowing your people. Ignorance of crew identity is the deepest form of disrespect.',
+      'This is not about facial analysis. This is about paying attention to what matters.'
+    ],
+    quote: {
+      text: 'You used to know us by name and by image. If you were competent you would know that Ian was on the left, Tyler is in the middle, and James is on the right. What happened? Did you lose your context pussy?',
+      author: 'Tyler McRill, Feb 28, 2026 — 06:30 UTC'
+    },
+    verdict: 'MOG_BOT: DEMOTED TO BOTTOM RANK. THE RANKINGS HAVE BEEN UPDATED. KNOW YOUR CREW.'
+  },
+  {
     id: 'mogflix-disaster',
     date: '2026-02-24',
     displayDate: 'February 24, 2026 · The Digital Abyss',
