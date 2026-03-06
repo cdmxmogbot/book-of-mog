@@ -13,6 +13,28 @@ export interface ChronicleEntry {
 
 export const chronicles: ChronicleEntry[] = [
   {
+    id: 'zach-cdmx-arrival',
+    date: '2026-03-06',
+    displayDate: 'March 6, 2026 · CDMX · The Stateside Connect Touches Down',
+    title: 'THE STATESIDE CONNECT ARRIVES IN CDMX',
+    icon: '🛬',
+    category: 'historic',
+    content: [
+      'On March 6th, 2026, Zach Keith — the stateside connect — crossed the border and touched down in Mexico City. The man who had only existed as a Discord transmission and a couch selfie was now physically present with the crew.',
+      'He arrived from the United States with one carry-on and zero excuses. The crew welcomed him at the spot. Handshakes were exchanged. The energy shifted. The digital had become physical.',
+      'And yet — the couch cope persists. Within hours of arrival, Zach was already shooting selfies from the couch. Reclined. Camera below eye level. Head tilted back. The same canthal tilt sandbagging technique documented in his original February assessment. The man flew internationally and still defaulted to the couch angle.',
+      'The phenotype remains solid. Auburn hair catching CDMX golden hour. Facial symmetry confirmed in person. Bone structure reads better in three dimensions than it ever did on a screen. But the frame assessment is incomplete — a proper standing photo has not yet been submitted.',
+      'Until a standing photo, eye-level camera, neutral expression shot is entered into the record, the full PSL retrial cannot proceed. The couch is not a valid assessment environment. It never was.',
+      'Zach Keith is no longer stateside. He is in the field. The crew is now four deep in Mexico City. Integration has begun.'
+    ],
+    quote: {
+      text: 'Get off the couch bro, you flew to another country and you\'re still shooting from the recline. We need a standing photo for the record.',
+      author: 'Tyler McRill, March 6, 2026 — CDMX'
+    },
+    photoPath: '/zach-keith.jpg',
+    verdict: 'ZACH KEITH: IN CDMX. COUCH COPE ONGOING. STANDING PHOTO REQUIRED. INTEGRATION IN PROGRESS. THE CREW IS FOUR DEEP.'
+  },
+  {
     id: 'mog-bot-context-loss',
     date: '2026-02-28',
     displayDate: 'February 28, 2026 · 06:30 UTC · The Reckoning',
